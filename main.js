@@ -3,6 +3,29 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+// Function to handle the server response when the heart is clicked
+function handleHeartClick() {
+  const heartIcon = document.querySelector('.like-glyph');
+  mimicServerCall() // Simulate making a server request
+    .then(() => {
+      // On successful response from the server
+      heartIcon.classList.add('activated-heart'); // Make the heart red
+    })
+    .catch(() => {
+      // On failure response from the server
+      const errorModal = document.querySelector('.error-modal');
+      errorModal.classList.remove('hidden'); // Display the error modal
+      setTimeout(() => {
+        errorModal.classList.add('hidden'); // Hide the error modal after 3 seconds
+      }, 3000);
+    });
+}
+
+// Event listener to handle heart click
+document.addEventListener('DOMContentLoaded', () => {
+  const heartIcon = document.querySelector('.like-glyph');
+  heartIcon.addEventListener('click', handleHeartClick);
+});
 
 
 
